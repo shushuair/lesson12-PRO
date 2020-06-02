@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script> 
+	
+		//my Bind
+		let neighbor = {
+			name: 'Alan',
+			age: 24,
+			country: 'USA',
+			fullInfo: function(){
+				return 'Name: ' + this.name + '\n' + 'Age: ' + this.age + '\n' + 'Country: ' + this.country + '.';
+			} 
+		};
+		
+		console.log(neighbor.fullInfo());
+		
+		let neighbor2 = {
+			name: 'Darryl',
+			age: 45,
+			country: 'New Zealand'
+		};
+		
+		let neighbor3 = {
+			name: 'Dave',
+			age: 33,
+			country: 'UK'
+		};
+	
+		function myBind(obj, fn){
+			return function(){
+				return fn.call(obj);
+			}		
+		}
+		
+		neighbor2FullName = myBind(neighbor2, neighbor.fullInfo);
+		neighbor3FullName = myBind(neighbor3, neighbor.fullInfo);
+		
+		console.log(neighbor2FullName());
+		console.log(neighbor3FullName());
+		
+		
+		//my Map
+		let arr = [1,2,3,4,5,6,7,8,9];
+		
+		let newMap = function(arr,func){
+			let result = [];
+			
+			for(let i = 0; i < arr.length; i++){
+				let item = arr[i];
+				let res = func || function foo(item){
+					return item * 2;
+				}			
+				result.push(res(item));
+			}
+			return result;
+		}
+		
+	//	console.log(newMap(arr));
+	</script>
+</body>
+</html>
